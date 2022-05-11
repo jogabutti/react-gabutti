@@ -1,16 +1,28 @@
-import logo from './logo.svg';
+import NavBar from "./components/NavBar/NavBar.jsx"
 import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-function App() {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#6A67CE',
+      textColor:"white"
+    },
+    secondary: {
+      light: '#0066ff',
+      main: '#0044ff',
+      contrastText: '#ffcc00',
+    },
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
+  },
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit and savegasdfsdsdas dddto reload.
-        </p>
-      </header>
-    </div>
+    <ThemeProvider theme={theme} >
+      <NavBar/>
+    </ThemeProvider>
   );
 }
 
