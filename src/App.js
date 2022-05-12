@@ -1,5 +1,7 @@
-import NavBar from "./components/NavBar/NavBar.jsx"
 import './App.css';
+import NavBar from "./components/NavBar/NavBar"
+import ItemListContainer from './components/ItemListContainer/ItemListContainer'
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -22,6 +24,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme} >
       <NavBar/>
+      <ItemListContainer greeting={"Productos"}/>
     </ThemeProvider>
   );
 }

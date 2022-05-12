@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-export default function BasicMenu({title, options}) {
+export default function MenuNavBar({title, options}) {
 
   return (
     <div>
