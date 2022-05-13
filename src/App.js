@@ -11,9 +11,10 @@ const theme = createTheme({
       textColor:"white"
     },
     secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
-      contrastText: '#ffcc00',
+      light: '#000000',
+      main: '#ffffff',
+      textColor:"#000000",
+      contrastText: '#000000',
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,

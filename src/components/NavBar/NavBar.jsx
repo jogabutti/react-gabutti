@@ -1,13 +1,17 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import { 
+  IconButton, 
+  Typography, 
+  Toolbar, 
+  Box, 
+  AppBar 
+} from '@mui/material'
 import MenuNavBar from './MenuNavBar/MenuNavBar'
 import CartWidget from './CartWidget';
 
 export default function NavBar() {
+  let categorias=["Hogar", "Oficina", "Gamer"]
+  
   return (
     <Box sx={{  flexGrow: 1, display: { xs: 'block', md: 'flex' } }}>
       <AppBar position="static" >
@@ -24,9 +28,9 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
             Ola
           </Typography>
-          <MenuNavBar title={"Hogar"}/>
-          <MenuNavBar title={"Oficina"}/>
-          <MenuNavBar title={"Gamer"}/>
+          {categorias.map(categoria=> 
+            <MenuNavBar title={categoria}/>
+          )}
           <CartWidget cant={8}/>
         </Toolbar>
       </AppBar>

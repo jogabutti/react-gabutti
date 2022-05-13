@@ -1,11 +1,12 @@
-import * as React from 'react';
+//@ts-check
+import React from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import {Badge, Box} from '@mui/material';
 
 export default function CartWidget({cant}) {
 
   return (
-     <Badge badgeContent={cant} color="primary">
+     <Badge badgeContent={cant} color="secondary">
         {/* ShoppingCart for responsive screens */}
         <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <ShoppingCartOutlinedIcon fontSize="medium"/>
