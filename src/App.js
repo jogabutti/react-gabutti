@@ -7,18 +7,15 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#6A67CE',
-      textColor:"white"
+      main: '#1B262C'
     },
     secondary: {
       light: '#000000',
       main: '#ffffff',
-      textColor:"#000000",
-      contrastText: '#000000',
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
-  },
+  }
 });
 
 const App = () => {

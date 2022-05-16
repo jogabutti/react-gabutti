@@ -23,13 +23,13 @@ export default function NavBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <img alt="icono ola" src="./ola.png"  style={{width:"60px", borderRadius:"100px"}}/>
+            <img alt="icono next" src="./next.png"  style={{width:"60px", filter: "invert(100%)"}}/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-            Ola
+            Next Generation
           </Typography>
           {categorias.map(categoria=> 
-            <MenuNavBar title={categoria}/>
+            <MenuNavBar key={categoria} title={categoria}/>
           )}
           <CartWidget cant={8}/>
         </Toolbar>

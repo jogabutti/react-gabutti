@@ -1,24 +1,44 @@
-import React from 'react';
-import ItemCount from '../ItemCount';
+import React, {useEffect, useState} from 'react';
+import ItemList from '../ItemList/ItemList';
 import {  Typography } from '@mui/material'
-
+import {data} from '../../data/data'
 
 export default function ItemListContainer({greeting}) {
+  const [productos, setProductos]= useState([])
+  const [loading, setLoading]= useState(true)
+  const [error, setError]= useState("")
 
-  const onAdd=(cantidad)=>{
-    alert("Compro: " + cantidad)
-  }
+  useEffect(() => {
+      setLoading(true);
+      const productosPromise = new Promise ((res, rej)=>{
+          setTimeout(()=>{
+           res(data)
+          }, 2000);
+        })
+      productosPromise.then(res => { 
+          setLoading(false)
+          setProductos(data)
+        }, rej =>{
+          setLoading(false)
+          setError("Error 404")
+        }).finally(()=> {setLoading(false)})
+  }, [])
 
   return (
     <>
-        <Typography variant="h4" color="text.secondary" align="center">
-        {greeting}
-        </Typography>
-        <ItemCount 
-          stock={10} 
-          initial={1} 
-          onAdd={onAdd} 
-        />
+      {loading ? 
+         <p> CARGANDO ...</p>
+         :
+         error ? 
+            <p> {error}</p>
+          :
+            <>
+              <Typography variant="h4" color="text.secondary" align="center">
+                {greeting}
+              </Typography>
+              <ItemList items={productos} />
+            </>
+      }
     </>
   );
 }
