@@ -1,17 +1,18 @@
+//@ts-check
 import React from 'react';
-import Button from '@mui/material/Button';
+import {Link} from '@mui/material'
 
-export default function MenuNavBar({title, options}) {
+export default function MenuNavBar({title}) {
 
   return (
-    <div>
-      <Button
+    <Link
+        href={`/categorias/${title}`} 
+        color="inherit" 
+        underline="none"
         id="basic-button"
-        //onClick={handleClick}
-        style={{color:"white"}}
+        sx={{color:"white", padding:"1%"}}
       >
         {title}
-      </Button>
-    </div>
+    </Link>
   );
 }
