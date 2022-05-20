@@ -48,4 +48,4 @@ MIT
 
 ## Curso por:
 
-[![Coder House logo image](https://www.greatplacetowork.com.ar/images/coderhouse-logo.png)](https://www.coderhouse.com/)
+[![Coder House logo image] (https://www.greatplacetowork.com.ar/images/coderhouse-logo.png)](https://www.coderhouse.com/)
