@@ -9,7 +9,7 @@ export default function CartWidget({cant}) {
      <Badge badgeContent={cant} color="secondary">
         {/* ShoppingCart for responsive screens */}
         <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-            <ShoppingCartOutlinedIcon fontSize="medium"/>
+            <ShoppingCartOutlinedIcon fontSize="small"/>
         </Box>
 
         {/* ShoppingCart for desktop mode */}

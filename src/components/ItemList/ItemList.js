@@ -5,10 +5,6 @@ import Item from '../Item/Item';
 
 export default function ItemList({items}) {
 
-  const onAdd=(cantidad)=>{
-    alert("Compro: " + cantidad)
-  }
-
   return (
     <Grid container 
         direction="row"
@@ -18,7 +14,7 @@ export default function ItemList({items}) {
     >
         {items.map(item=> 
             <Grid item key={item.id}>     
-                <Item stock={10} initial={1} onAdd={onAdd} item={item} />
+                <Item item={item} />
             </Grid>
         )}
     </Grid>

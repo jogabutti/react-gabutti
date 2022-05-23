@@ -6,7 +6,7 @@ export default function MenuNavBar({title}) {
 
   return (
     <Link
-        href={`/categorias/${title}`} 
+        href={`/categorias/${title.toLowerCase()}`} 
         color="inherit" 
         underline="none"
         id="basic-button"
