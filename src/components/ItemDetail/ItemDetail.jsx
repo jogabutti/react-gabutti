@@ -1,5 +1,5 @@
 //@ts-check
-import React from 'react';
+import React, {useState} from 'react';
 import { 
     Card,
     CardContent,
@@ -9,11 +9,13 @@ import {
     Box
 } from '@mui/material';
 import ItemCount from '../ItemCount';
+import TerminarCompra from '../TerminarCompra'
 
 export default function ItemDetail({item}) {
-    
+    const [state, setState] = useState()
+
     const onAdd=(cantidad)=>{
-        alert("Compro: " + cantidad)
+        setState(cantidad)
     }
 
     return (
@@ -46,8 +48,12 @@ export default function ItemDetail({item}) {
                         Stock Disponible {item.stock}
                     </Typography>
                     <CardActions sx={{flexDirection:"column", gap:"10px" }}>
-                        <ItemCount  stock={10} initial={1} onAdd={onAdd} />
-                    </CardActions> 
+                        {state ? 
+                            <TerminarCompra/>
+                            :
+                            <ItemCount  stock={10} initial={1} onAdd={onAdd} />
+                        }
+                    </CardActions>
                 </CardContent>
             </Box>
         </Card>
