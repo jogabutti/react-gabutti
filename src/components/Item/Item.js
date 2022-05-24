@@ -2,15 +2,13 @@
 import React from 'react';
 import { 
     Card,
-    CardActions,
     CardContent,
     CardMedia,
     Typography,
     Link
 } from '@mui/material';
-import ItemCount from '../ItemCount';
 
-export default function Item({stock, initial, onAdd, item}) {
+export default function Item({item}) {
    
     return (
         <Card elevation={3} sx={{ maxWidth: 345, borderRadius:"20px" }}>
@@ -31,9 +29,6 @@ export default function Item({stock, initial, onAdd, item}) {
                     </Typography>
                 </CardContent>
             </Link>
-            <CardActions sx={{flexDirection:"column", gap:"10px", justifyContent:"center", alignItems:"center" }}>
-                <ItemCount stock={stock} initial={initial} onAdd={onAdd} />
-            </CardActions>
         </Card>
   );
 }

@@ -36,7 +36,7 @@ export default function ItemDetailContainer() {
          error ? 
             <p> {error}</p>
           :
-            <ItemDetail item={producto} />
+            <ItemDetail item={producto}/>
       }
     </>
   );
