@@ -11,7 +11,7 @@ export default function ItemCount() {
             <Button
                 variant="outlined"
             >
-                Terminar Compra
+                Terminar Compra 
             </Button>
         </Link>
     )
