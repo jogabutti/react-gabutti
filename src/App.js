@@ -1,12 +1,13 @@
 //@ts-check
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './App.css';
 import NavBar from "./components/NavBar/NavBar"
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
-
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Cart from './components/Cart/Cart'
+import { CartProvider } from './context/CartContext';
 
 const theme = createTheme({
   palette: {
@@ -24,17 +25,20 @@ const theme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme} >
-      <BrowserRouter>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element ={<ItemListContainer greeting={"Productos"}/>}/>
-          <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
-          <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
-          <Route path="/*" element ={<p> ERROR</p>}/>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <CartProvider >
+      <ThemeProvider theme={theme} >
+        <BrowserRouter>
+          <NavBar/>
+          <Routes>
+            <Route path="/" element ={<ItemListContainer greeting={"Productos"}/>}/>
+            <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
+            <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
+            <Route path="/cart" element={<Cart />}/>
+            <Route path="/*" element ={<p> ERROR</p>}/>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </CartProvider>
   );
 }
 

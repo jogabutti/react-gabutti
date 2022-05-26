@@ -1,5 +1,5 @@
 //@ts-check
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { 
     Card,
     CardContent,
@@ -8,16 +8,18 @@ import {
     CardActions,
     Box
 } from '@mui/material';
+import { CartContext } from '../../context/CartContext';
 import ItemCount from '../ItemCount';
-import TerminarCompra from '../TerminarCompra'
 
 export default function ItemDetail({item}) {
+    const {removeItems, addItems, clear, isInCart}= useContext(CartContext)
+
     const [state, setState] = useState()
 
     const onAdd=(cantidad)=>{
         setState(cantidad)
     }
-
+    
     return (
         <Card elevation={3} sx={{ width:"95%",  margin:"2%", borderRadius:"20px", display:"flex", direction:"row"}}>
             <CardMedia
@@ -48,11 +50,7 @@ export default function ItemDetail({item}) {
                         Stock Disponible {item.stock}
                     </Typography>
                     <CardActions sx={{flexDirection:"column", gap:"10px" }}>
-                        {state ? 
-                            <TerminarCompra/>
-                            :
-                            <ItemCount  stock={10} initial={1} onAdd={onAdd} />
-                        }
+                        <ItemCount  stock={item.stock} initial={1} onAdd={onAdd} state={state} addItems = {addItems} item = {item} />
                     </CardActions>
                 </CardContent>
             </Box>
