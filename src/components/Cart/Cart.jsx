@@ -1,5 +1,5 @@
 //@ts-check
-import React from 'react';
+import React, {useContext} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { CartContext } from '../../context/CartContext';
 
 const TAX_RATE = 0.07;
 
@@ -38,49 +39,52 @@ const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 export default function Cart() {
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="spanning table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center" colSpan={3}>
-              Details
-            </TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Desc</TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">Unit</TableCell>
-            <TableCell align="right">Sum</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.desc}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-            </TableRow>
-          ))}
+    const {cart} = useContext(CartContext)
 
-          <TableRow>
-            <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    console.log("CRT", cart)
+    return (
+        <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+            <TableHead>
+            <TableRow>
+                <TableCell align="center" colSpan={3}>
+                Detalle
+                </TableCell>
+                <TableCell align="right">Precio</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>Descripción</TableCell>
+                <TableCell align="right">Precio.</TableCell>
+                <TableCell align="right">Cantidad</TableCell>
+                <TableCell align="right">Suma</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {cart.map((row) => (
+                <TableRow key={row.id}>
+                <TableCell>{row.description}</TableCell>
+                <TableCell align="right">{row.precio}</TableCell>
+                <TableCell align="right">{row.quantity}</TableCell>
+                <TableCell align="right">{ccyFormat(row.precio*row.quantity)}</TableCell>
+                </TableRow>
+            ))}
+
+            <TableRow>
+                <TableCell rowSpan={3} />
+                <TableCell colSpan={2}>Subtotal</TableCell>
+                <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>Tax</TableCell>
+                <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
+                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+            </TableRow>
+            </TableBody>
+        </Table>
+        </TableContainer>
+    );
 }

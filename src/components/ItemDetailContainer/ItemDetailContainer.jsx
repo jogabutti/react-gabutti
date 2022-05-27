@@ -1,5 +1,6 @@
 //@ts-check
 import React, {useEffect, useState} from 'react';
+import { Box } from '@mui/material';
 import {data} from '../../data/data'
 import {useParams} from 'react-router-dom'
 import ItemDetail from '../ItemDetail/ItemDetail';
@@ -29,7 +30,7 @@ export default function ItemDetailContainer() {
   }, [id])
 
   return (
-    <>
+    <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}>
       {loading ? 
           <Loading/>
          :
@@ -38,6 +39,6 @@ export default function ItemDetailContainer() {
           :
             <ItemDetail item={producto}/>
       }
-    </>
+    </Box>
   );
 }

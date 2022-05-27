@@ -2,18 +2,29 @@
 import React from 'react';
 import { 
     Button,
-    Link
+    Grid
 } from '@mui/material';
 
 export default function ItemCount({finish}) {
     return (
-        <Link href={`/cart`} color="inherit" underline="none">
+        <Grid
+        container
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+      >
             <Button
                 variant="outlined"
-                onClick={()=>finish()}
+                onClick={()=>finish("home")}
             >
-                Terminar Compra 
+                Seguir Comprando
             </Button>
-        </Link> 
+            <Button
+                variant="contained"
+                onClick={()=>finish("finish")}
+            >
+                Ir al carrito
+            </Button>
+        </Grid>
     )
 }

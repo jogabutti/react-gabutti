@@ -1,6 +1,6 @@
 //@ts-check
 import React, {useEffect, useState} from 'react';
-import { Typography } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import ItemList from '../ItemList/ItemList';
 import {data} from '../../data/data'
@@ -32,7 +32,9 @@ export default function ItemListContainer({greeting}) {
   return (
     <>
       {loading ? 
-          <Loading/>
+          <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"column", justifyContent:"center", alignItems:"center"}}>
+            <Loading/>
+          </Box>
          :
          error ? 
             <p> {error}</p>

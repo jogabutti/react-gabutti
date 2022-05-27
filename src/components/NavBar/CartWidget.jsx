@@ -1,12 +1,14 @@
 //@ts-check
-import React from 'react';
+import React, { useContext} from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import {Badge, Box} from '@mui/material';
+import { CartContext } from '../../context/CartContext';
 
 export default function CartWidget({cant}) {
+  const {totalInCart} = useContext(CartContext)
 
   return (
-     <Badge badgeContent={cant} color="secondary">
+     <Badge badgeContent={totalInCart()} color="secondary">
         {/* ShoppingCart for responsive screens */}
         <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <ShoppingCartOutlinedIcon fontSize="small"/>

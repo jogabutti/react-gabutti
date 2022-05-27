@@ -16,7 +16,7 @@ export default function Item({item}) {
                 <CardMedia
                 component="img"
                 alt="silla green iguana"
-                height="250px"
+                height="200px"
                 sx={{objectFit:'contain'}}
                 image={item.image}
                 />
