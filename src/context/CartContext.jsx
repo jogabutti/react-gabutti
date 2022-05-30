@@ -6,7 +6,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({children})=>{
     const [cart, setCart] = useState([])
-
+    
     const removeItems = (id)=>{
         const foundItem = cart.find((carr)=>carr.id === id)
         if (foundItem){
@@ -50,6 +50,7 @@ export const CartProvider = ({children})=>{
             return acc = acc + item.quantity
         }, 0)
     }
+    
     const cartClear = ()=> setCart([])
 
     return (

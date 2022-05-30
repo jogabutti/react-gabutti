@@ -41,7 +41,6 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 export default function Cart() {
     const {cart} = useContext(CartContext)
 
-    console.log("CRT", cart)
     return (
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -62,7 +61,7 @@ export default function Cart() {
             <TableBody>
             {cart.map((row) => (
                 <TableRow key={row.id}>
-                <TableCell>{row.description}</TableCell>
+                <TableCell>{row.title}</TableCell>
                 <TableCell align="right">{row.precio}</TableCell>
                 <TableCell align="right">{row.quantity}</TableCell>
                 <TableCell align="right">{ccyFormat(row.precio*row.quantity)}</TableCell>

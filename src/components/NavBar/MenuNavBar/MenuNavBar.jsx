@@ -1,18 +1,12 @@
 //@ts-check
 import React from 'react';
-import {Link} from '@mui/material'
+import {NavLink} from 'react-router-dom'
 
 export default function MenuNavBar({title}) {
 
   return (
-    <Link
-        href={`/categorias/${title.toLowerCase()}`} 
-        color="inherit" 
-        underline="none"
-        id="basic-button"
-        sx={{color:"white", padding:"1%"}}
-      >
+    <NavLink to={`/categorias/${title.toLowerCase()}`} style={{textDecoration:"none", color:"white", padding:"1%"}}>
         {title}
-    </Link>
+    </NavLink>
   );
 }
