@@ -1,19 +1,21 @@
 //@ts-check
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { 
     ButtonGroup,
     Button,
     Box
 } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import TerminarCompra from './TerminarCompra'
+import TerminarCompra from './TerminarCompra';
+import { CartContext } from '../context/CartContext';
 
-export default function ItemCount({stock, initial, onAdd, state, addItems, item}) {
+export default function ItemCount({ initial, onAdd, state, item}) {
+    const {removeItems, addItems, clear}= useContext(CartContext)
     let history = useNavigate();
     const [cantidad, setCantidad] = useState(initial)
 
     const sumar =()=>{
-        if (cantidad<=stock){
+        if (cantidad<=item.stock){
             setCantidad(cantidad+1)
         }
     }
@@ -25,7 +27,10 @@ export default function ItemCount({stock, initial, onAdd, state, addItems, item}
     }
     
     const finish = (option)=>{
+<<<<<<< HEAD
         addItems({...item,"quantity": cantidad})
+=======
+>>>>>>> 33bd5dc2f89dd89bbbe9eb7c3488ebf727de7625
         if (option === "finish"){
             history("/cart");
         } 
@@ -34,6 +39,10 @@ export default function ItemCount({stock, initial, onAdd, state, addItems, item}
         }
     }
 
+    const agregarCarrito = (cantidad)=>{
+        addItems({...item,"quantity": cantidad})
+        onAdd()
+    }
     return (
         <Box sx={{width:"60%", margin:"5%", display:"flex", direction:"column", justifyContent:"left", alignItems:"left"}}>
             {state ?
@@ -55,15 +64,15 @@ export default function ItemCount({stock, initial, onAdd, state, addItems, item}
                                 {cantidad}
                             </Button>
                             <Button 
-                                disabled={cantidad===stock}
+                                disabled={cantidad===item.stock}
                                 onClick={()=>{sumar() }}
                             >
                                 +
                             </Button>
                     </ButtonGroup>
                     <Button 
-                        disabled={cantidad===0 || cantidad===stock}
-                        onClick={()=>{onAdd(cantidad)}}
+                        disabled={cantidad===0 || cantidad===item.stock}
+                        onClick={()=>{agregarCarrito(cantidad)}}
                     >
                         Agregar al carrito
                     </Button>

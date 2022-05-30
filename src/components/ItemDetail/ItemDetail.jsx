@@ -1,21 +1,18 @@
 //@ts-check
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { 
     Card,
     CardMedia,
     Typography,
     Box
 } from '@mui/material';
-import { CartContext } from '../../context/CartContext';
 import ItemCount from '../ItemCount';
 
 export default function ItemDetail({item}) {
-    const {removeItems, addItems, clear, isInCart}= useContext(CartContext)
+    const [state, setState] = useState(false)
 
-    const [state, setState] = useState()
-
-    const onAdd=(cantidad)=>{
-        setState(cantidad)
+    const onAdd=()=>{
+        setState(true)
     }
     
     return (
@@ -48,7 +45,7 @@ export default function ItemDetail({item}) {
                 <Typography variant="overline" color={item.stock>5 ? "#4E9F3D" : "#AF0404"}>
                     Stock Disponible {item.stock}
                 </Typography>
-                <ItemCount  stock={item.stock} initial={1} onAdd={onAdd} state={state} addItems = {addItems} item = {item} />
+                <ItemCount  initial={1} onAdd={onAdd} state={state} item = {item} />
             </Box>
         </Card>
   );

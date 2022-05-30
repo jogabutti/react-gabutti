@@ -4,9 +4,9 @@ import {
   Typography, 
   Toolbar, 
   Box, 
-  AppBar,
-  Link
+  AppBar
 } from '@mui/material'
+import {NavLink} from 'react-router-dom'
 import MenuNavBar from './MenuNavBar/MenuNavBar'
 import CartWidget from './CartWidget';
 
@@ -17,7 +17,7 @@ export default function NavBar() {
     <Box sx={{  flexGrow: 1, display: { xs: 'block', md: 'flex' } }}>
       <AppBar position="static" >
         <Toolbar sx={{  flexGrow: 1, display:{ xs: 'block', md: 'flex'}, textAlign:{xs:'center', md:'left'}}}>
-          <Link href={`/`} color="inherit" underline="none">
+        <NavLink to={`/`} style={{color:"inherit", textDecoration:"none"}}>
             <IconButton
               size="large"
               edge="start"
@@ -30,7 +30,7 @@ export default function NavBar() {
                 Next Generation
               </Typography>
             </IconButton>
-          </Link>
+          </NavLink>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
           </Typography>
           {categorias.map(categoria=> 

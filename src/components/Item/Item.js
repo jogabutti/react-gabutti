@@ -4,15 +4,15 @@ import {
     Card,
     CardContent,
     CardMedia,
-    Typography,
-    Link
+    Typography
 } from '@mui/material';
+import {NavLink} from 'react-router-dom'
 
 export default function Item({item}) {
    
     return (
         <Card elevation={3} sx={{ maxWidth: 345, borderRadius:"20px" }}>
-            <Link href={`/productos/${item.id}`} color="inherit" underline="none">
+            <NavLink to={`/productos/${item.id}`} style={{color:"inherit", textDecoration:"none"}}>
                 <CardMedia
                 component="img"
                 alt="silla green iguana"
@@ -28,7 +28,7 @@ export default function Item({item}) {
                         {item.description}
                     </Typography>
                 </CardContent>
-            </Link>
+            </NavLink>
         </Card>
   );
 }
