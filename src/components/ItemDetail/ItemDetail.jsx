@@ -2,10 +2,8 @@
 import React, {useState, useContext} from 'react';
 import { 
     Card,
-    CardContent,
     CardMedia,
     Typography,
-    CardActions,
     Box
 } from '@mui/material';
 import { CartContext } from '../../context/CartContext';
