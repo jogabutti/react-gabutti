@@ -8,11 +8,11 @@ import {
 export default function ItemCount({finish}) {
     return (
         <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
+            container
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+        >
             <Button
                 variant="outlined"
                 onClick={()=>finish("home")}

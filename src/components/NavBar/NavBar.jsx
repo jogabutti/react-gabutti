@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 import {NavLink} from 'react-router-dom'
 import MenuNavBar from './MenuNavBar/MenuNavBar'
-import CartWidget from './CartWidget';
+import CartWidget from './CartWidget/CartWidget';
 
 export default function NavBar() {
   let categorias=["Hogar", "Oficina", "Gamer"]

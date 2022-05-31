@@ -1,89 +1,86 @@
-//@ts-check
-import React, {useContext} from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// @ts-nocheck
+import React, {useContext, useEffect, useState} from 'react';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, IconButton, Box} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { CartContext } from '../../context/CartContext';
+import CartVacio from '../CartVacio'
+import ButtonCount from './../NavBar/ButtonCount/ButtonCount';
 
-const TAX_RATE = 0.07;
-
-function ccyFormat(num) {
-  return `${num.toFixed(2)}`;
-}
-
-function priceRow(qty, unit) {
-  return qty * unit;
-}
-
-function createRow(desc, qty, unit) {
-  const price = priceRow(qty, unit);
-  return { desc, qty, unit, price };
-}
-
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
-
-const rows = [
-  createRow('Paperclips (Box)', 100, 1.15),
-  createRow('Paper (Case)', 10, 45.99),
-  createRow('Waste Basket', 2, 17.99),
-];
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 export default function Cart() {
-    const {cart} = useContext(CartContext)
+  const {cart, clear} = useContext(CartContext)
+  const [total, setTotal]=useState(0)
+  const [desc, setDescuento]=useState(0.1)
 
-    return (
-        <TableContainer component={Paper}>
+  const subtotal=(items) =>{
+    setTotal(items.map(item =>item.quantity*item.precio).reduce((sum, i) => sum + i, 0))
+  }
+
+  useEffect(() => { 
+    subtotal(cart)
+  }, [cart]) 
+
+  return (
+    <Box sx={{width:"70vw", height:"80vh", marginLeft:"15%", display:"flex", direction:"column", justifyContent:"center", alignItems:"center"}}>
+    {cart.length>0 ? 
+      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
-            <TableHead>
+          <TableHead>
             <TableRow>
-                <TableCell align="center" colSpan={3}>
-                Detalle
+                <TableCell align="center" colSpan={4}>
+                  Detalle
                 </TableCell>
-                <TableCell align="right">Precio</TableCell>
+                <TableCell align="right"/>
             </TableRow>
             <TableRow>
+                <TableCell align="left" />
                 <TableCell>Descripción</TableCell>
-                <TableCell align="right">Precio.</TableCell>
-                <TableCell align="right">Cantidad</TableCell>
-                <TableCell align="right">Suma</TableCell>
+                <TableCell align="center">Cantidad</TableCell>
+                <TableCell align="center">Suma Total</TableCell>
+                <TableCell align="center"> Opciones</TableCell>
             </TableRow>
-            </TableHead>
-            <TableBody>
+          </TableHead>
+          <TableBody>
             {cart.map((row) => (
-                <TableRow key={row.id}>
-                <TableCell>{row.title}</TableCell>
-                <TableCell align="right">{row.precio}</TableCell>
-                <TableCell align="right">{row.quantity}</TableCell>
-                <TableCell align="right">{ccyFormat(row.precio*row.quantity)}</TableCell>
+              <TableRow key={row.id}>
+                  <TableCell align="left"> <Avatar alt="Natacha" src={row.image} /></TableCell>
+                  <TableCell>{row.title}</TableCell>
+                  <TableCell align="center">
+                    <ButtonCount cantidad={row.quantity} item={row}/>
+                  </TableCell>
+                  <TableCell align="center">{"$ "+row.precio*row.quantity}</TableCell>
+                  <TableCell align="center"> 
+                    <IconButton>
+                      <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
             ))}
-
             <TableRow>
                 <TableCell rowSpan={3} />
                 <TableCell colSpan={2}>Subtotal</TableCell>
-                <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+                <TableCell align="center">{total}</TableCell>
+                <TableCell align="left"/>
             </TableRow>
             <TableRow>
-                <TableCell>Tax</TableCell>
-                <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+                <TableCell >{ "Descuento   "+ `${desc * 100} %`}</TableCell>
+                <TableCell align="center">{desc * total}</TableCell>
+                <TableCell align="left"/>
             </TableRow>
             <TableRow>
-                <TableCell colSpan={2}>Total</TableCell>
-                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                <TableCell colSpan={1}/>
+                <TableCell >Total</TableCell>
+                <TableCell align="center">{total-total*desc}</TableCell>
+                <TableCell align="left"/>
             </TableRow>
-            </TableBody>
+          </TableBody>
         </Table>
-        </TableContainer>
-    );
+      </TableContainer>
+      :
+      /* <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}> */
+        <CartVacio/>
+      /* </Box> */
+    }
+    </Box>
+      );
 }

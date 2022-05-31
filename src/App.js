@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/" element ={<ItemListContainer greeting={"Productos"}/>}/>
             <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
             <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
-            <Route path="/cart" element={<Cart />}/>
+            <Route path="/cart" element={<Cart/>}/>
             <Route path="/*" element ={<p> ERROR</p>}/>
           </Routes>
         </BrowserRouter>
