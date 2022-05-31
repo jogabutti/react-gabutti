@@ -27,6 +27,10 @@ export default function ItemCount({ initial, onAdd, state, item}) {
     }
     
     const finish = (option)=>{
+<<<<<<< HEAD
+        addItems({...item,"quantity": cantidad})
+=======
+>>>>>>> 33bd5dc2f89dd89bbbe9eb7c3488ebf727de7625
         if (option === "finish"){
             history("/cart");
         } 
