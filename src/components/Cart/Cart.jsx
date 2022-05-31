@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {useContext, useEffect, useState} from 'react';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, IconButton, Box} from '@mui/material';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box} from '@mui/material';
 import { CartContext } from '../../context/CartContext';
 import CartVacio from '../CartVacio'
 import CartBody from './CartBody'
@@ -47,7 +47,7 @@ export default function Cart() {
                 <TableCell align="left"/>
             </TableRow>
             <TableRow>
-                <TableCell >{ "Descuento   "+ `${desc * 100} %`}</TableCell>
+                <TableCell >{ `Descuento  ${desc * 100} %`}</TableCell>
                 <TableCell align="center">{desc * total}</TableCell>
                 <TableCell align="left"/>
             </TableRow>

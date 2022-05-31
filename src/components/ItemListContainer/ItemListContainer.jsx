@@ -3,30 +3,32 @@ import React, {useEffect, useState} from 'react';
 import { Typography, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import ItemList from '../ItemList/ItemList';
-import {data} from '../../data/data'
 import Loading from '../Loading'
+import {fetchItems} from '../../server/querys';
+import Error from '../Error';
 
 export default function ItemListContainer({greeting}) {
   const { id } = useParams()
   const [productos, setProductos]= useState([])
   const [loading, setLoading]= useState(true)
-  const [error, setError]= useState("")
+  const [error, setError]= useState(false)
 
   useEffect(() => {
       setLoading(true);
-      const productosPromise = new Promise ((res, rej)=>{
-          setTimeout(()=>{
-            const myData = id ? data.filter(prod => prod.category === id.toLowerCase()) : data
-            res(myData)
-          }, 2000);
-        })
-      productosPromise.then(res => { 
-          setLoading(false)
-          setProductos(res)
-        }, rej =>{
-          setLoading(false)
-          setError("Error 404")
-        }).finally(()=> {setLoading(false)})
+        fetchItems(id || "")
+          .then((snapshot)=> {
+            if (snapshot.size === 0) { 
+              setError(true)
+            }else{
+              setProductos(snapshot.docs.map((item)=>({id: item.id, ...item.data()})));
+              setError(false)
+            }
+            setLoading(false)
+          })
+          .catch((error)=>{
+            setError(true)
+            setLoading(false)
+          })
   }, [id])
 
   return (
@@ -37,7 +39,7 @@ export default function ItemListContainer({greeting}) {
           </Box>
          :
          error ? 
-            <p> {error}</p>
+            <Error/>
           :
             <>
               <Typography variant="h4" color="text.secondary" align="center"  mb={2} mt={2}>
