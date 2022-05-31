@@ -1,11 +1,9 @@
 // @ts-nocheck
 import React, {useContext, useEffect, useState} from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, IconButton, Box} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { CartContext } from '../../context/CartContext';
 import CartVacio from '../CartVacio'
-import ButtonCount from './../NavBar/ButtonCount/ButtonCount';
-
+import CartBody from './CartBody'
 
 export default function Cart() {
   const {cart, clear} = useContext(CartContext)
@@ -21,10 +19,10 @@ export default function Cart() {
   }, [cart]) 
 
   return (
-    <Box sx={{width:"70vw", height:"80vh", marginLeft:"15%", display:"flex", direction:"column", justifyContent:"center", alignItems:"center"}}>
+    <>
     {cart.length>0 ? 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+        <Table sx={{ minWidth: 200 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
                 <TableCell align="center" colSpan={4}>
@@ -40,22 +38,8 @@ export default function Cart() {
                 <TableCell align="center"> Opciones</TableCell>
             </TableRow>
           </TableHead>
+          <CartBody/>
           <TableBody>
-            {cart.map((row) => (
-              <TableRow key={row.id}>
-                  <TableCell align="left"> <Avatar alt="Natacha" src={row.image} /></TableCell>
-                  <TableCell>{row.title}</TableCell>
-                  <TableCell align="center">
-                    <ButtonCount cantidad={row.quantity} item={row}/>
-                  </TableCell>
-                  <TableCell align="center">{"$ "+row.precio*row.quantity}</TableCell>
-                  <TableCell align="center"> 
-                    <IconButton>
-                      <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-            ))}
             <TableRow>
                 <TableCell rowSpan={3} />
                 <TableCell colSpan={2}>Subtotal</TableCell>
@@ -77,10 +61,10 @@ export default function Cart() {
         </Table>
       </TableContainer>
       :
-      /* <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}> */
+      <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}> 
         <CartVacio/>
-      /* </Box> */
+      </Box> 
     }
-    </Box>
+    </>
       );
 }
