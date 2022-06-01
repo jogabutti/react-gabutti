@@ -6,12 +6,15 @@ import CartVacio from '../CartVacio'
 import CartBody from './CartBody'
 
 export default function Cart() {
-  const {cart, clear} = useContext(CartContext)
+  const {cart} = useContext(CartContext)
   const [total, setTotal]=useState(0)
   const [desc, setDescuento]=useState(0.1)
 
   const subtotal=(items) =>{
     setTotal(items.map(item =>item.quantity*item.precio).reduce((sum, i) => sum + i, 0))
+    if (items.precio>50000){
+      setDescuento(0.2)
+    }
   }
 
   useEffect(() => { 

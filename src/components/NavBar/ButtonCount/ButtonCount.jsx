@@ -9,7 +9,7 @@ import {CartContext} from '../../../context/CartContext';
 import { useState } from 'react';
 
 export default function ButtonCount({ cantidad, item}) {
-    const {buttonsCheckout, addItems, clear, cart} = useContext(CartContext)
+    const {buttonsCheckout} = useContext(CartContext)
     const [qty, setQty]=useState(cantidad)
     
     const sumar =()=>{

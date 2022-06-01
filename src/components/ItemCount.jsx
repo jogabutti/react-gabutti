@@ -10,7 +10,7 @@ import TerminarCompra from './TerminarCompra';
 import { CartContext } from '../context/CartContext';
 
 export default function ItemCount({ initial, onAdd, state, item}) {
-    const {removeItems, addItems, clear}= useContext(CartContext)
+    const {/* removeItems, */ addItems/* , clear */}= useContext(CartContext)
     let history = useNavigate();
     const [cantidad, setCantidad] = useState(initial)
 

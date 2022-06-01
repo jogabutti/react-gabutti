@@ -2,7 +2,6 @@
 import React from 'react';
 import {Typography, Button, Grid} from '@mui/material';
 import {NavLink} from 'react-router-dom';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 export default function Cart() {
 
