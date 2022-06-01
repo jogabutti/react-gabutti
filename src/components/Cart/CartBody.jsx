@@ -18,12 +18,18 @@ export default function Cart() {
         <TableBody component={Paper}>
             {state.map((row) => (
                 <TableRow key={row.id && row.quantity }>
-                    <TableCell align="left"> <Avatar alt="Natacha" src={row.image} /></TableCell>
-                    <TableCell>{row.title}</TableCell>
-                    <TableCell align="center">
-                    <ButtonCount cantidad={row.quantity} item={row}/>
+                    <TableCell align="left"> 
+                        <Avatar alt="imagen compra silla" src={row.image} variant="rounded" sx={{ width: "6vw", height: "12vh", objectFit:'contain' }}  />
                     </TableCell>
-                    <TableCell align="center">{"$ "+row.precio*row.quantity}</TableCell>
+                    <TableCell>
+                        {row.title}
+                    </TableCell>
+                    <TableCell align="center">
+                        <ButtonCount cantidad={row.quantity} item={row}/>
+                    </TableCell>
+                    <TableCell align="center">
+                        {"$ "+row.precio*row.quantity}
+                    </TableCell>
                     <TableCell align="center"> 
                     <IconButton>
                         <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
