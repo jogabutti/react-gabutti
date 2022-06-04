@@ -11,6 +11,7 @@ export default function Cart() {
         direction="column"
         justifyContent="space-evenly"
         alignItems="center"
+        sx={{marginTop:"5%"}}
     >
         <img alt="icono next" src="/cart.png"  style={{width:"10vw"}}/>
         <Typography gutterBottom variant="h2" component="div"> 

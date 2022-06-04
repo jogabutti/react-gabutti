@@ -26,14 +26,14 @@ export default function ItemDetail({item}) {
                 image={item.image}
                 />
             </Box>
-             <Box sx={{ width:"50%"}}>
+             <Box sx={{ width:"50%",  height:"50%",}}>
                 <Typography gutterBottom variant="h2" component="div">
                     {item.title}
                 </Typography>
-                <Typography variant="h5" color="text.secondary">
+                <Typography variant="h5" color="text.secondary" sx={{ display: { xs: "none", md:"flex"} }}>
                     {item.description}
                 </Typography>
-                <Typography variant="h4" color="text.secondary">
+                <Typography variant="h4" color="text.secondary" sx={{ display: { xs: "none", md:"flex"} }}>
                     6 cuotas de  ${(item.precio * 1.50)/6}
                 </Typography>
                 <Typography variant="h6" color="#4E9F3D">

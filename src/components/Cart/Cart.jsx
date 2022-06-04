@@ -1,73 +1,46 @@
-// @ts-nocheck
-import React, {useContext, useEffect, useState} from 'react';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box} from '@mui/material';
-import { CartContext } from '../../context/CartContext';
-import CartVacio from '../CartVacio'
-import CartBody from './CartBody'
+//@ts-check
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { IconButton, CardActionArea, Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function Cart() {
-  const {cart} = useContext(CartContext)
-  const [total, setTotal]=useState(0)
-  const [desc, setDescuento]=useState(0.1)
-
-  const subtotal=(items) =>{
-    setTotal(items.map(item =>item.quantity*item.precio).reduce((sum, i) => sum + i, 0))
-    if (items.precio>50000){
-      setDescuento(0.2)
-    }
-  }
-
-  useEffect(() => { 
-    subtotal(cart)
-  }, [cart]) 
-
+export default function Cart({row, clear}) {
   return (
-    <>
-    {cart.length>0 ? 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 200 }} aria-label="spanning table">
-          <TableHead>
-            <TableRow>
-                <TableCell align="center" colSpan={4}>
-                  Detalle
-                </TableCell>
-                <TableCell align="right"/>
-            </TableRow>
-            <TableRow>
-                <TableCell align="left" />
-                <TableCell>Descripción</TableCell>
-                <TableCell align="center">Cantidad</TableCell>
-                <TableCell align="center">Suma Total</TableCell>
-                <TableCell align="center"> Opciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <CartBody/>
-          <TableBody>
-            <TableRow>
-                <TableCell rowSpan={3} />
-                <TableCell colSpan={2}>Subtotal</TableCell>
-                <TableCell align="center">{total}</TableCell>
-                <TableCell align="left"/>
-            </TableRow>
-            <TableRow>
-                <TableCell >{ `Descuento  ${desc * 100} %`}</TableCell>
-                <TableCell align="center">{desc * total}</TableCell>
-                <TableCell align="left"/>
-            </TableRow>
-            <TableRow>
-                <TableCell colSpan={1}/>
-                <TableCell >Total</TableCell>
-                <TableCell align="center">{total-total*desc}</TableCell>
-                <TableCell align="left"/>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-      :
-      <Box sx={{ width:"100vw",height: "80vh",  display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}> 
-        <CartVacio/>
-      </Box> 
-    }
-    </>
-      );
+    <Card elevation={3} sx={{ margin:"2%",marginBottom:"5%",width: "40vw", height:"22vh",  borderRadius:"20px"}}>
+      <CardActionArea sx={{height:"100%", display:"flex", direction:"row"}}>
+        <CardMedia
+          component="img"
+          height="190"
+          sx={{objectFit:'contain'}}
+          image={row.image}
+          alt={"Silla " + row.title}
+        />
+        <CardContent  sx={{paddingBottom:0,height:"80%",width:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+            <CardContent  sx={{padding:0, display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                <Box>
+                    <Typography gutterBottom variant="h4" component="div">
+                        {row.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {"$ " + row.precio + " x "+ row.quantity}
+                    </Typography>
+                </Box>
+                <Box sx={{ display:"flex", alignItems:"flex-start"}} >
+                    <IconButton size="small" color="primary" >
+                        <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
+                    </IconButton>
+                </Box>
+            </CardContent>
+            <Box sx={{padding:"0% 3% 0%", display:"flex", justifyContent:"end"}}>
+                <Typography variant="h6" color="text.secondary">
+                    {"SUBTOTAL $" +  row.precio * row.quantity}
+                </Typography>
+            </Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
 }

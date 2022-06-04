@@ -6,7 +6,7 @@ import './App.css';
 import NavBar from "./components/NavBar/NavBar"
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
-import Cart from './components/Cart/Cart'
+import CartContainer from './components/Cart/CartContainer'
 import Error from './components/Error'
 import { CartProvider } from './context/CartContext';
 
@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/" element ={<ItemListContainer greeting={"Productos"}/>}/>
             <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
             <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
-            <Route path="/cart" element={<Cart />}/>
+            <Route path="/cart" element={<CartContainer />}/>
             <Route path="/*" element ={<Error />}/>
           </Routes>
         </BrowserRouter>
