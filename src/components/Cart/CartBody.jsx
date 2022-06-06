@@ -19,8 +19,8 @@ export default function Cart() {
             {state.map((row) => (
                 <TableRow key={row.id && row.quantity }>
                     <TableCell align="center"> 
-                    <IconButton>
-                        <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
+                    <IconButton onClick={()=>clear(row.id)}>
+                        <DeleteIcon fontSize="medium" color='disabled' />
                     </IconButton>
                     </TableCell>
                     <TableCell align="left"> 

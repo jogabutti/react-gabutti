@@ -64,8 +64,8 @@ export default function PopoverCart({anchorEl, open, handleClose, id}) {
                   </Typography>
                 </CardContent>
                 <Box sx={{ display:"flex", alignItems:"flex-start"}} >
-                    <IconButton size="small" color="primary" >
-                        <DeleteIcon fontSize="medium" color='disabled' onClick={()=>clear(row.id)}/>
+                    <IconButton size="small" color="primary"  onClick={()=>clear(row.id)}>
+                        <DeleteIcon fontSize="medium" color='disabled'/>
                     </IconButton>
                 </Box>
               </Box>
