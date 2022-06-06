@@ -3,7 +3,7 @@ import React from 'react';
 import {Typography, Button, Grid} from '@mui/material';
 import {NavLink} from 'react-router-dom';
 
-export default function Cart() {
+export default function CartEmpty() {
 
   return (
     <Grid

@@ -25,11 +25,11 @@ export default function CartTotal({desc, total}) {
                     {"DESCUENTO " + (desc*100) + "% " }
                 </Typography>
                 <Typography variant="button" fontSize={20}color="green">
-                    {" -" + (total*desc)}
+                    {" -$" + (total*desc)}
                 </Typography>
               </Box>
               <Box  sx={{width:"100%", display:"flex", flexDirection:"row", justifyContent:"space-between", alignItems:"space-between"}}> 
-              <Typography variant="button" fontSize={20}>
+                <Typography variant="button" fontSize={20}>
                     TOTAL
                 </Typography>
                 <Typography variant="button" fontSize={20}>

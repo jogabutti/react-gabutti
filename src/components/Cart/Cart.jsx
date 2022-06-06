@@ -9,8 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Cart({row, clear}) {
   return (
-    <Card elevation={3} sx={{ margin:"2%",marginBottom:"5%",width: "40vw", height:"22vh",  borderRadius:"20px"}}>
-      <CardActionArea sx={{height:"100%", display:"flex", direction:"row"}}>
+    <Card elevation={3} sx={{margin:"2%", marginBottom:"5%",borderRadius:"20px"}}>
+      <CardActionArea sx={{display:"flex", direction:"row"}}>
         <CardMedia
           component="img"
           height="190"

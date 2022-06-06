@@ -3,16 +3,16 @@ import React, {useContext, useEffect, useState}from 'react';
 import {Box} from '@mui/material';
 import {CartContext} from '../../context/CartContext';
 import {generateOrder, updateStock} from '../../server/querys';
-import Cart from '../Cart/Cart'
-import CartVacio from '../Cart/CartVacio'
-import CartTotal from '../Cart/CartTotal'
+import Cart from '../Cart/Cart';
+import CartEmpty from '../Cart/CartEmpty';
+import CartTotal from '../Cart/CartTotal';
 import CheckoutExitoso from './CheckoutExitoso';
 import Checkout from './Checkout';
 import Loading from '../Loading';
 import Error from '../Error';
 
 export default function CartContainer() {
-    const {cart, clear, deleteCart} = useContext(CartContext)
+    const {cart, clear, deleteCart, totalCart} = useContext(CartContext)
     const [total, setTotal]=useState(0)
     const [desc, setDescuento]=useState(0.1)
     const [checkout, setCheckout] = useState("")
@@ -20,9 +20,11 @@ export default function CartContainer() {
     const [loading, setLoading] = useState(false)
 
     const subtotal=(items) =>{
-      setTotal(items.map(item =>item.quantity*item.precio).reduce((sum, i) => sum + i, 0))
-      if (items.precio>50000){
-        setDescuento(0.2)
+      setTotal(totalCart())
+      if (items.length>3){
+        setDescuento(0.3)
+      }else {
+        setDescuento(0.1)
       }
     }
   
@@ -47,7 +49,7 @@ export default function CartContainer() {
     return (
       <>
       {cart.length === 0 && !checkout ?
-        <CartVacio />
+        <CartEmpty />
       :
         (loading ? 
           <Loading/>
@@ -76,7 +78,7 @@ export default function CartContainer() {
                     flexDirection:"row",
                     justifyContent:"space-around"
                 }}>
-                    <Box >
+                    <Box sx={{ width: "50%", height:"30%"}} >
                         {cart.map((row) => (
                             <Cart key={row.id} row={row} clear={clear}/>
                         ))}
