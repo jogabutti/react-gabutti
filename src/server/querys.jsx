@@ -11,7 +11,7 @@ import {
 	updateDoc,
 } from 'firebase/firestore'
 
-require("./initialize")
+require("./Initialize")
 
 const db=getFirestore();
 //Trae todas las categorias

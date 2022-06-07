@@ -1,12 +1,12 @@
 // @ts-nocheck
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {Button, TextField, Card, CardContent, Typography, Box, Grid } from '@mui/material';
 import { CartContext } from "../../context/CartContext";
 
 
 export default function Checkout({total, generar}) {
     const { cart} = useContext(CartContext);
-
+    const [camposVacios, setCamposVacios] = useState(true)
     const [buyer, setBuyer] = useState({
         name: "",
         email: "",
@@ -19,23 +19,27 @@ export default function Checkout({total, generar}) {
         total,
     }
 
+    useEffect(() => {
+      setCamposVacios(buyer.name === "" || buyer.phone === 0 || buyer.email === "" || buyer.emailConfirmacion === "")
+    }, [buyer])
+    
     const handleChange = (e) => {
       e.preventDefault();
       setBuyer({ ...buyer, [e.target.name]: e.target.value });
     };
     
+
     const handleSubmit = (e) => {
       e.preventDefault(); 
         // Validar que no haya campos vacios
-        if (buyer.name !== "" && buyer.phone !== "" && buyer.email !== "" && buyer.email === buyer.emailConfirmacion ) {
+        if (!camposVacios) {
             generar(order)
-		} else {
-            //aca poner error de campos incompletos
 		}
     };
+    
   return (
-    <Card elevation={3} sx={{width: "40vw", height:"40vh", borderRadius:"20px",margin:"2%", padding:"2%"}}>
-        <CardContent  sx={{paddingBottom:0,height:"75%",width:"90%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+    <Card elevation={3} sx={{width: "40vw", height:camposVacios ? "33vh" : "30vh", borderRadius:"20px",margin:"2%", padding:"2%"}}>
+        <CardContent  sx={{paddingBottom:0,height:"75%",width:"95%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
             <CardContent  sx={{padding:0, display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
                 <Typography gutterBottom variant="h4" component="div">
                     CHECKOUT
@@ -92,12 +96,17 @@ export default function Checkout({total, generar}) {
                                 value={buyer.emailConfirmacion}
                                 name="emailConfirmacion"
                             />
+                            {
+                                buyer.email !== buyer.emailConfirmacion &&
+                                    <Typography gutterBottom variant="subtitle" component="div" color="red">
+                                        Los emails no coinciden
+                                    </Typography>
+                            }
                         </Grid>
                         <Button
-                            disabled={buyer.email !== buyer.emailConfirmacion}
+                            disabled={buyer.email !== buyer.emailConfirmacion || camposVacios}
                             type="submit"
                             variant="contained"
-                            onSubmit={handleSubmit}
                             sx={{
                                 display: "flex",
                                 margin: "auto",

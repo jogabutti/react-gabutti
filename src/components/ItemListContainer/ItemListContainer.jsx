@@ -4,7 +4,7 @@ import { Typography, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import ItemList from '../ItemList/ItemList';
 import Loading from '../Loading'
-import {fetchItems} from '../../server/querys';
+import {fetchItems} from '../../server/Querys';
 import Error from '../Error';
 
 export default function ItemListContainer({greeting}) {
@@ -39,7 +39,7 @@ export default function ItemListContainer({greeting}) {
           </Box>
          :
          error ? 
-            <Error/>
+            <Error msg={`Error al intentar acceder a la categoria ${id}`}/>
           :
             <>
               <Typography variant="h4" color="text.secondary" align="center"  mb={2} mt={2}>

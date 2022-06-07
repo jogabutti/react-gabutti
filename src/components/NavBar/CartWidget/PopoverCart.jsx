@@ -14,15 +14,20 @@ export default function PopoverCart({anchorEl, open, handleClose, id}) {
   const [total, setTotal]=useState(0)
   const [desc, setDescuento]=useState(0.1)
 
-  useEffect(() => {
+  const calcDesc=() =>{
     setTotal(totalCart())
     if (cart.length>3){
       setDescuento(0.3)
     }else {
       setDescuento(0.1)
     }
-  }, [cart])
-  
+  }
+
+  useEffect(() => { 
+    calcDesc()
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]) 
+
   const finish = ()=>{
     history("/cart");
     handleClose()
@@ -44,7 +49,7 @@ export default function PopoverCart({anchorEl, open, handleClose, id}) {
           padding:"1vw"
           }}>
             {cart.map((row) => (
-              <Box sx={{
+              <Box key={row.id} sx={{
                 display:"flex",
                 flexDirection:"row"
               }}>
@@ -60,7 +65,7 @@ export default function PopoverCart({anchorEl, open, handleClose, id}) {
                     {row.title}
                   </Typography>
                   <Typography  variant="h6" fontSize={14} color="text.secondary">
-                    {row.quantity +" x "+ "$"+ row.precio * row.quantity}
+                    {row.quantity +" x $"+ row.precio * row.quantity}
                   </Typography>
                 </CardContent>
                 <Box sx={{ display:"flex", alignItems:"flex-start"}} >

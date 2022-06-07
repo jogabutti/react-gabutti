@@ -67,7 +67,7 @@ export default function ItemCount({ initial, onAdd, state, item}) {
                             </Button>
                     </ButtonGroup>
                     <Button 
-                        disabled={cantidad===0 || cantidad===item.stock}
+                        disabled={cantidad===0 || cantidad>item.stock}
                         onClick={()=>{agregarCarrito(cantidad)}}
                     >
                         Agregar al carrito

@@ -35,7 +35,7 @@ const App = () => {
             <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
             <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
             <Route path="/cart" element={<CartContainer />}/>
-            <Route path="/*" element ={<Error />}/>
+            <Route path="/*" element ={<Error msg={""}/>}/>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

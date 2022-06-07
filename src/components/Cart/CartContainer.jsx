@@ -2,7 +2,7 @@
 import React, {useContext, useEffect, useState}from 'react';
 import {Box} from '@mui/material';
 import {CartContext} from '../../context/CartContext';
-import {generateOrder, updateStock} from '../../server/querys';
+import {generateOrder, updateStock} from '../../server/Querys';
 import Cart from '../Cart/Cart';
 import CartEmpty from '../Cart/CartEmpty';
 import CartTotal from '../Cart/CartTotal';
@@ -19,9 +19,9 @@ export default function CartContainer() {
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const subtotal=(items) =>{
+    const subtotal=() =>{
       setTotal(totalCart())
-      if (items.length>3){
+      if (cart.length>3){
         setDescuento(0.3)
       }else {
         setDescuento(0.1)
@@ -29,7 +29,8 @@ export default function CartContainer() {
     }
   
     useEffect(() => { 
-      subtotal(cart)
+      subtotal()
+      //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart]) 
   
     const generar = (order)=>{
@@ -55,7 +56,7 @@ export default function CartContainer() {
           <Loading/>
           :
           error ? 
-            <Error />
+            <Error msg={"Error en al procesar la compra, vuelva a intentarlo"} />
           :
           
             checkout ? 
