@@ -19,6 +19,7 @@ export default function ItemCount({ initial, onAdd, state, item, quantityInCart}
     }, [initial])
     
     const sumar =()=>{
+        console.log('first', cantidad,"+", quantityInCart,"<=",item.stock)
         if (cantidad+quantityInCart<=item.stock){
             setCantidad(cantidad+1)
         }

@@ -18,15 +18,13 @@ export default function ItemDetail({item}) {
     }
 
     useEffect(() => {
-        if (cart){
-            setQuantityInCart(cart.map(prod=>{ 
-                if (prod.id === item.id){
-                    return prod.quantity
-                }else{
-                    return [0]
-                } 
-            })[0])  
-        }
+        setQuantityInCart(cart.map(prod=>{ 
+            if (prod.id === item.id){
+                return prod.quantity
+            }else{
+                return [0]
+            } 
+        })[0] || 0)  
         // eslint-disable-next-line
     }, [item])
 
