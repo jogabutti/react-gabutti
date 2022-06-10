@@ -1,7 +1,6 @@
-//@ts-check
+ 
 import React, {createContext, useState} from 'react';
 
-// @ts-ignore
 export const CartContext = createContext();
 
 export const CartProvider = ({children})=>{

@@ -1,12 +1,14 @@
-//@ts-check
+ 
 import React, { useContext, useEffect, useState} from 'react';
 import {Badge, Box} from '@mui/material';
 import { CartContext } from '../../../context/CartContext';
-import PopoverCart from './PopoverCart'
+import PopoverCart from './PopoverCartEmpty'
+import PopoverCartEmpty from './PopoverCart'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCart';
 
 export default function CartWidget() {
   const {totalInCart} = useContext(CartContext)
-  const [state, setState]= useState()
+  const [state, setState]= useState(0)
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -22,19 +24,22 @@ export default function CartWidget() {
   useEffect(() => {
     setState(totalInCart())
   }, [totalInCart])
-
+  
   return (
      <Badge badgeContent={state} color="secondary">
         {/* ShoppingCart for responsive screens */}
         <Box onClick={handleClick} sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-          <img alt="icono next" src="/cart.png"  style={{width:"20px", filter: "invert(100%)"}}/>
+          <ShoppingCartOutlinedIcon/> 
         </Box>
 
         {/* ShoppingCart for desktop mode */}
         <Box onClick={handleClick} sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          <img alt="icono next" src="/cart.png"  style={{width:"30px", filter: "invert(100%)"}}/>
+          <ShoppingCartOutlinedIcon fontSize="large"/> 
         </Box>
-        {state ? <PopoverCart anchorEl={anchorEl} open={open} handleClose={handleClose} id={id}/> : <></>}
+        {state === 0 ? 
+          <PopoverCart anchorEl={anchorEl} open={open} handleClose={handleClose} id={id}/> 
+        : 
+          <PopoverCartEmpty anchorEl={anchorEl} open={open} handleClose={handleClose} id={id}/>}
     </Badge>
   );
 }

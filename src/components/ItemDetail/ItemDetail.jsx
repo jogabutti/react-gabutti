@@ -1,5 +1,4 @@
-//@ts-check
-import React, {useState} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import { 
     Card,
     CardMedia,
@@ -7,17 +6,33 @@ import {
     Box
 } from '@mui/material';
 import ItemCount from '../ItemCount';
+import {CartContext} from '../../context/CartContext';
 
 export default function ItemDetail({item}) {
+    const {cart} = useContext(CartContext);
     const [state, setState] = useState(false)
+    const [quantityInCart, setQuantityInCart] = useState(0)
 
     const onAdd=()=>{
         setState(true)
     }
-    
+
+    useEffect(() => {
+        if (cart){
+            setQuantityInCart(cart.map(prod=>{ 
+                if (prod.id === item.id){
+                    return prod.quantity
+                }else{
+                    return [0]
+                } 
+            })[0])  
+        }
+        // eslint-disable-next-line
+    }, [item])
+
     return (
-        <Card elevation={3} sx={{ width:"70%", height:"70%", borderRadius:"20px", display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}>
-             <Box sx={{ width:"50%", height:"90%"}}>
+        <Card elevation={3} sx={{ width:"70%", height:"80%", borderRadius:"20px", display:"flex", direction:"row", justifyContent:"center", alignItems:"center"}}>
+            <Box sx={{ width:"50%", height:"90%"}}>
                 <CardMedia
                 component="img"
                 alt="silla green iguana"
@@ -43,9 +58,15 @@ export default function ItemDetail({item}) {
                 $ {item.precio}
                 </Typography>
                 <Typography variant="overline" color={item.stock>5 ? "#4E9F3D" : "#AF0404"}>
-                    Stock Disponible {item.stock}
+                    Stock Disponible {item.stock }
                 </Typography>
-                <ItemCount  initial={1} onAdd={onAdd} state={state} item = {item} />
+                <ItemCount  initial={0} onAdd={onAdd} state={state} item = {item} quantityInCart={quantityInCart}/>
+                {quantityInCart>0
+                &&
+                <Typography variant="button" color={"#4E9F3D"}>
+                    Ya tienes {quantityInCart} sillas en el carrito
+                </Typography>
+                }
             </Box>
         </Card>
   );

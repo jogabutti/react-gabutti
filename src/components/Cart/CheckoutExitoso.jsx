@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import React from "react";
 import {Card, Typography, Grid, Button} from '@mui/material';
 import {NavLink} from 'react-router-dom';

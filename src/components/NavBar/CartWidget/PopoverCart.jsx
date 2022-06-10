@@ -1,4 +1,4 @@
-//@ts-check
+ 
 import React, { useState, useContext, useEffect } from 'react';
 import Popover from '@mui/material/Popover';
 import {CartContext} from '../../../context/CartContext';

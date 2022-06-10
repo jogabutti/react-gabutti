@@ -1,4 +1,4 @@
-//@ts-check
+ 
 import React, {useContext, useEffect, useState}from 'react';
 import {Box} from '@mui/material';
 import {CartContext} from '../../context/CartContext';

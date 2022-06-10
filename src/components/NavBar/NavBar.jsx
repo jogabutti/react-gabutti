@@ -6,13 +6,13 @@ import {
   Box, 
   AppBar
 } from '@mui/material'
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import MenuNavBar from './MenuNavBar/MenuNavBar'
 import CartWidget from './CartWidget/CartWidget';
 
 export default function NavBar() {
+
   let categorias=["Hogar", "Oficina", "Gamer"]
-  
   return (
     <Box sx={{  flexGrow: 1, display: { xs: 'block', md: 'flex' } }}>
       <AppBar position="static" >
@@ -34,7 +34,7 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
           </Typography>
           {categorias.map(categoria=> 
-            <MenuNavBar key={categoria} title={categoria}/>
+            <MenuNavBar key={categoria} title={categoria} />
           )}
           <CartWidget />
         </Toolbar>

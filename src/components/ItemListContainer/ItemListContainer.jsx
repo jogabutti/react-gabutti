@@ -1,4 +1,3 @@
-//@ts-check
 import React, {useEffect, useState} from 'react';
 import { Typography, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
@@ -43,7 +42,7 @@ export default function ItemListContainer({greeting}) {
           :
             <>
               <Typography variant="h4" color="text.secondary" align="center"  mb={2} mt={2}>
-                {greeting}
+                {id ? id.toUpperCase() : greeting}
               </Typography>
               <ItemList items={productos} />
             </>

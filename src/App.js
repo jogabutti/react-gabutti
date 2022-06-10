@@ -1,4 +1,3 @@
-//@ts-check
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -31,8 +30,8 @@ const App = () => {
         <BrowserRouter>
           <NavBar/>
           <Routes>
-            <Route path="/" element ={<ItemListContainer greeting={"Productos"}/>}/>
-            <Route path="/categorias/:id" element ={<ItemListContainer greeting={"Productos filtrados"}/>}/>
+            <Route path="/" element ={<ItemListContainer greeting={"PRODUCTOS"}/>}/>
+            <Route path="/categorias/:id" element ={<ItemListContainer greeting={""}/>}/>
             <Route path="/productos/:id" element ={<ItemDetailContainer />}/>
             <Route path="/cart" element={<CartContainer />}/>
             <Route path="/*" element ={<Error msg={""}/>}/>

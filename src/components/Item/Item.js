@@ -1,4 +1,4 @@
-//@ts-check
+ 
 import React from 'react';
 import { 
     Card,
@@ -11,7 +11,7 @@ import {NavLink} from 'react-router-dom'
 export default function Item({item}) {
    
     return (
-        <Card elevation={3} sx={{ maxWidth: 345, borderRadius:"20px" }}>
+        <Card elevation={3} sx={{maxWidth: 345, borderRadius:"20px"}}>
             <NavLink to={`/productos/${item.id}`} style={{color:"inherit", textDecoration:"none"}}>
                 <CardMedia
                 component="img"
