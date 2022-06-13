@@ -9,23 +9,23 @@ import ItemCount from '../ItemCount';
 import {CartContext} from '../../context/CartContext';
 
 export default function ItemDetail({item}) {
-    const {cart} = useContext(CartContext);
+    const {isInCart, cart} = useContext(CartContext);
     const [state, setState] = useState(false)
-    const [quantityInCart, setQuantityInCart] = useState(0)
-
+    const [q, setQ]=useState(0)
     const onAdd=()=>{
         setState(true)
     }
 
     useEffect(() => {
-        setQuantityInCart(cart.map(prod=>{ 
+        setQ(isInCart(item.id) ? 
+        cart.find(prod=>{ 
             if (prod.id === item.id){
                 return prod.quantity
-            }else{
-                return [0]
-            } 
-        })[0] || 0)  
-        // eslint-disable-next-line
+            }
+        }).quantity
+        : 
+        0)
+    // eslint-disable-next-line
     }, [item])
 
     return (
@@ -58,11 +58,11 @@ export default function ItemDetail({item}) {
                 <Typography variant="overline" color={item.stock>5 ? "#4E9F3D" : "#AF0404"}>
                     Stock Disponible {item.stock }
                 </Typography>
-                <ItemCount  initial={0} onAdd={onAdd} state={state} item = {item} quantityInCart={quantityInCart}/>
-                {quantityInCart>0
+                <ItemCount  initial={0} onAdd={onAdd} state={state} item = {item} quantityInCart={q}/>
+                {q >0
                 &&
-                <Typography variant="button" color={"#4E9F3D"}>
-                    Ya tienes {quantityInCart} sillas en el carrito
+                <Typography variant="button" color={"#4E9F3D"} textAlign="center">
+                    Ya tienes {q} sillas en el carrito
                 </Typography>
                 }
             </Box>
