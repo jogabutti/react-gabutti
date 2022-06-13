@@ -79,6 +79,12 @@ export default function ItemCount({ initial, onAdd, state, item, quantityInCart}
                     >
                         Agregar al carrito
                     </Button>
+                    <Button
+                        variant="contained"
+                        onClick={()=>finish("home")}
+                    >
+                        Volver a Productos
+                    </Button>
                 </>
             }
         </Box>
