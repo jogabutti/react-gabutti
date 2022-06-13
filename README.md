@@ -5,7 +5,7 @@
 
 [![Build Status](	https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jogabutti) [![Build Status](	https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maria-jose-gabutti/)
 
-[![Build Status](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsNuhagIJigvy7BzNc3d9kKkGk0gY5YV7HtA&usqp=CAU)](https://nextGeneration.netlify.app/) 
+[![Build Status](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsNuhagIJigvy7BzNc3d9kKkGk0gY5YV7HtA&usqp=CAU)](https://62a7827d9062e9111bfc8a1d--lighthearted-narwhal-2f1c16.netlify.app/)
 
 Next Generation es un e-commerce para la venta de sillas para el hogar, las oficinas o estilo gammer. El proyecto final para el curso de React de CODER HOUSE, desarrollado por Maria Jose Gabutti, en el cual se aplica todo lo visto durante el curso: 
 
